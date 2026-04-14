@@ -7,7 +7,7 @@ def main():
 
     from fem_solver.core.mesh import Mesh
     from fem_solver.core.node import Node
-    from fem_solver.core.element import TriangleElement
+
 
     solver_mesh = Mesh()
     for i, (x, y) in enumerate(points):

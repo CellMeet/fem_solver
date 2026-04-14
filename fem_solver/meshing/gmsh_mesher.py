@@ -11,14 +11,18 @@ class GmshMesher:
     def create_box_mesh(xmin, xmax, ymin, ymax, zmin, zmax, mesh_size=0.05, filename="box.msh"):
         gmsh.initialize()
         gmsh.model.add("box")
-        gmsh.model.occ.addBox(xmin, ymin, zmin, xmax-xmin, ymax-ymin, zmax-zmin)
-        gmsh.model.occ.synchronize()
-        
+
+        # 优化网格
         gmsh.option.setNumber("Mesh.CharacteristicLengthMin", mesh_size)
         gmsh.option.setNumber("Mesh.CharacteristicLengthMax", mesh_size)
         gmsh.option.setNumber("Mesh.Algorithm3D", 10)
         gmsh.option.setNumber("Mesh.Optimize", 1)
         gmsh.option.setNumber("Mesh.OptimizeNetgen", 1)
+
+        gmsh.model.occ.addBox(xmin, ymin, zmin, xmax-xmin, ymax-ymin, zmax-zmin)
+        gmsh.model.occ.synchronize()
+        
+
         
         gmsh.model.mesh.generate(3)
         gmsh.write(filename)
