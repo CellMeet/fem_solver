@@ -1,0 +1,7 @@
+Comparison between FEM and Analytical solution
+===============================================
+
+Number of sample points on centerline: 50
+Maximum absolute error: nan
+Mean absolute error:     nan
+Root mean square error:   nan
