@@ -55,13 +55,21 @@ class GmshMesher:
         for eid, cell_data in enumerate(tetra_cells):
             n0, n1, n2, n3 = cell_data
             nodes = [
-                solver_mesh.nodes[n0 - 1],
-                solver_mesh.nodes[n1 - 1],
-                solver_mesh.nodes[n2 - 1],
-                solver_mesh.nodes[n3 - 1]
+                solver_mesh.nodes[n0],
+                solver_mesh.nodes[n1],
+                solver_mesh.nodes[n2],
+                solver_mesh.nodes[n3]
             ]
             elem = TetrahedronElement(eid, nodes)
             solver_mesh.elements.append(elem)
 
         solver_mesh.element_count = len(tetra_cells)
+
+        print("===== meshio 索引检查 =====")
+        print("tetra_cells 前5个:")
+        print(tetra_cells[:5])
+
+        print("最小索引:", tetra_cells.min())
+        print("最大索引:", tetra_cells.max())
+        print("节点总数:", len(points))
         return solver_mesh
